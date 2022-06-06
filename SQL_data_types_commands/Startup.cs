@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SQL_data_types_commands.DAL;
@@ -14,6 +15,12 @@ namespace SQL_data_types_commands
 {
     public class Startup
     {
+        private readonly IConfiguration _configuration;
+
+        public Startup(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
@@ -22,7 +29,7 @@ namespace SQL_data_types_commands
 
             services.AddDbContext<AppDbContext>(opt =>
             {
-                opt.UseSqlServer("Server=DESKTOP-QHHB50J;Database=P127BussinessMMC;Trusted_Connection=true Integrated Security=true");
+                opt.UseSqlServer(_configuration.GetConnectionString("Default"));
             }
             );   
         }

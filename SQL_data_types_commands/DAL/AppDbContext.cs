@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using SQL_data_types_commands.Models;
 
 namespace SQL_data_types_commands.DAL
 {
@@ -8,5 +9,6 @@ namespace SQL_data_types_commands.DAL
         {
 
         }
+        public DbSet<Blog>Blogs { get; set; }
     }
 }
